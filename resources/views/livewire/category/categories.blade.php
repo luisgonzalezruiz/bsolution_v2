@@ -1,78 +1,98 @@
-<div class="row sales layout-top-spacing">
-    <div class="col-sm-12">
-        <div class="widget widget-chart-one">
-            <div class="widget-heading">
-                <h4 class="card-title">
-                    <span class="font-weight-bold">{{ $componentName}} | {{$pageTitle }}</span>
-                </h4>
+<div class="container-fluid">
 
-                <ul class="tabs tab-pills">
-                    <li>
-                        <a href="javascript:void(0)" class="tabmenu bg-dark"
-                            data-toggle="modal"
-                            data-target="#theModal">Agregar
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            @include('common.searchBox')
-
-            <div class="widget-content">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-sm table-striped mt-1">
-                        <thead class="text-white" style ="background: #3B3F5C">
-                            <tr>
-                                <th class="table-th text-white">Descripcion</th>
-                                <th class="table-th text-white">Imagen</th>
-                                <th class="table-th text-white">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($categories as $category)
-                            <tr>
-                                <td>
-                                    <h6>{{ $category->name }}</h6>
-                                </td>
-                                <td class="text-center">
-                                    <span>
-                                        <img src="{{Storage::url($category->imagen)}}"
-                                            alt="imagen de ejemplo" height="60" width="60" class="rounded">
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Editar"
-                                            wire:click="edit({{ $category->id }})">
-                                            <i class="fas fa-edit fa-xs"></i>
-                                    </a>
-
-                                    {{-- @if( $category->products->count()> 1) --}}
-                                        <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Borrar"
-                                            onclick="confirm({{ $category->id }}, {{ $category->products->count() }})">
-                                            <i class="fas fa-trash fa-xs"></i>
-                                        </a>
-                                    {{-- @endif --}}
-
-                                </td>
-                            </tr>
-
-                            @endforeach
-
-                        </tbody>
-
-                    </table>
-
-                     {{ $categories->links() }}
-
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                        <li class="breadcrumb-item active">Sellers</li>
+                    </ol>
                 </div>
-
+                <h4 class="page-title">Sellers</h4>
             </div>
-
         </div>
-
     </div>
+    <!-- end page title -->
 
-    @include('livewire.category.form')
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-between mb-2">
+                        <div class="col-auto">
+                            {{-- <form class="search-bar position-relative mb-sm-0 mb-2">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="mdi mdi-magnify"></span>
+                            </form> --}}
+                            @include('common.searchBox')
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end">
+                                <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"><i class="mdi mdi-basket me-1"></i> Add Sellers</button>
+                                <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-centered table-nowrap table-borderless table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Descripcion</th>
+                                    <th>Imagen</th>
+                                    <th style="width: 82px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($categories as $category)
+                                    <tr>
+                                        <td>
+                                            {{ $category->name }}
+                                        </td>
+                                        <td class="table-user">
+                                            <span>
+                                                <img src="{{Storage::url($category->imagen)}}"
+                                                    alt="imagen de ejemplo" class="me-2 rounded-circle">
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <ul class="pagination pagination-rounded justify-content-end my-2">
+                        <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                                <span class="visually-hidden">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                <span aria-hidden="true">»</span>
+                                <span class="visually-hidden">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!-- end row -->
 
 </div>
 

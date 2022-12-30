@@ -25,6 +25,18 @@
 <!-- Vendor js -->
 <script src={{ asset("ubold/assets/js/vendor.min.js") }}></script>
 
+<!-- third party js -->
+<script src={{ asset("ubold/assets/libs/datatables.net/js/jquery.dataTables.min.js") }}></script>
+<script src={{ asset("ubold/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js") }}></script>
+<script src={{ asset("ubold/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js") }}></script>
+<script src={{ asset("ubold/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js") }}></script>
+<script src={{ asset("ubold/assets/libs/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js") }}></script>
+<!-- third party js ends -->
+
+<!-- Datatables init -->
+{{-- <script src={{ asset("ubold/assets/js/pages/customers.init.js") }}></script> --}}
+
+
 
 <!-- Select2 js-->
 <script src={{ asset("ubold/assets/libs/select2/js/select2.min.js") }}></script>
@@ -33,6 +45,7 @@
 
 <!-- Quill js -->
 <script src={{ asset("ubold/assets/libs/quill/quill.min.js") }}></script>
+
 <!-- Init js-->
 <script src={{ asset("ubold/assets/js/pages/form-fileuploads.init.js") }}></script>
 

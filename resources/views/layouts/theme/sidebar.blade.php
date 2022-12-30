@@ -61,7 +61,7 @@
                                 <a href="index.html">Dashboard 1</a>
                             </li>
                             <li>
-                                <a href="dashboard-2.html">Dashboard 2</a>
+                                <a href="{{ route('categories') }}" >Categorias</a>
                             </li>
                             <li>
                                 <a href="dashboard-3.html">Dashboard 3</a>
