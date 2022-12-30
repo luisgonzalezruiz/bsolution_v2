@@ -36,7 +36,7 @@ class Categories extends Component
     {
         $this->pageTitle     = 'Listado';
         $this->componentName = 'Categorías';
-        $this->pagination    = 3;
+        $this->pagination    = 10;
         $this->search        = '';
        // $this->object        = null;
     }

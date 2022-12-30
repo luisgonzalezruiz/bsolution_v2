@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item active">Sellers</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Sellers</h4>
+                <h4 class="page-title">Categorías</h4>
             </div>
         </div>
     </div>
@@ -21,34 +21,51 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+
                     <div class="row justify-content-between mb-2">
                         <div class="col-auto">
-                            {{-- <form class="search-bar position-relative mb-sm-0 mb-2">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="mdi mdi-magnify"></span>
-                            </form> --}}
-                            @include('common.searchBox')
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-end">
-                                <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"><i class="mdi mdi-basket me-1"></i> Add Sellers</button>
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-1"><i class="mdi mdi-cog"></i></button>
+                            <div class="d-flex flex-wrap align-items-center">
+                                <label for="status-select" class="me-2">Filtrar</label>
+                                <div class="me-sm-3">
+                                    <select class="form-select my-1 my-md-0" id="status-select">
+                                        <option selected="">All</option>
+                                        <option value="1">Id</option>
+                                        <option value="2">Descripcion</option>
+                                    </select>
+                                </div>
+
+                                @include('common.searchBox')
+
                             </div>
-                        </div><!-- end col-->
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="text-lg-end">
+                                <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"
+                                    data-bs-toggle="modal" data-bs-target="#custom-modal">
+                                    <i class="mdi mdi-plus-circle me-1"></i> Add New </button>
+                                <button wire.click.prevent="test()" type="button" class="btn btn-light waves-effect mb-2" >Export</button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-centered table-nowrap table-borderless table-hover mb-0">
+                        <table class="table table-sm table-centered table-nowrap mb-0">
                             <thead class="table-light">
                                 <tr>
+                                    <th>#</th>
                                     <th>Descripcion</th>
                                     <th>Imagen</th>
-                                    <th style="width: 82px;">Action</th>
+                                    <th style="width: 125px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($categories as $category)
                                     <tr>
+                                        <td class="text-body fw-bold">
+                                            {{ $category->id }}
+                                        </td>
                                         <td>
                                             {{ $category->name }}
                                         </td>
@@ -59,6 +76,7 @@
                                             </span>
                                         </td>
                                         <td>
+                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                             <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                                             <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                         </td>
@@ -88,6 +106,7 @@
                             </a>
                         </li>
                     </ul>
+
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -95,6 +114,11 @@
     <!-- end row -->
 
 </div>
+
+ @include('livewire.category.form')
+
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
@@ -119,6 +143,10 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
 });
+
+function test(){
+    console.log("prueba");
+}
 
 function confirm(id, products){
 

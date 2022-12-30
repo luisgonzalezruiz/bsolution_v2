@@ -1,36 +1,12 @@
 
-      </div>
-      <div class="modal-footer">
-            <button
-                type="button"
-                wire:click.prevent="resetUI()"
-                class="btn btn-dark close-btn text-info"
-                data-dismiss="modal"
-            >
-                CERRAR
-            </button>
-            @if ($selected_id < 1)
-            {{-- @if ($object->exists ?? false) --}}
-                <button
-                    type="button"
-                    wire:click.prevent="store()"
-                    class="btn btn-dark close-modal"
-                >
-                    GUARDAR
-                </button>
-            @else
-                <button
-                    type="button"
-                    wire:click.prevent="update()"
-                    class="btn btn-dark close-modal"
-                >
-                    ACTUALIZAR
-                </button>
-
-            @endif
-
-      </div>
-
-    </div>
-  </div>
-</div>
+            <div class="modal-footer bg-light">
+                @if ($selected_id < 1)
+                    <button wire:click.prevent="store()" type="button" class="btn btn-success waves-effect waves-light">Insertar</button>
+                @else
+                    <button wire:click.prevent="update()" type="button" class="btn btn-success waves-effect waves-light">Actualizar</button>
+                @endif
+                <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
