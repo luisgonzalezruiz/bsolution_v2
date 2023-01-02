@@ -68,6 +68,15 @@ class Categories extends Component
                 ->section('content');
     }
 
+    public function new()
+    {
+        /* $this->authorize('create', Role::class); */
+
+        /* $this->object              = new Role(); */
+        //$this->selectedPermissions = [];
+        $this->emit('show-modal', 'show modal');
+    }
+
     public function edit($id)
     {
         // de esta forma estamos especificando las columnas a recuperar, son buenas practicas
@@ -83,6 +92,8 @@ class Categories extends Component
 
     public function store()
     {
+
+
         $rules=[
             'name'=>'required|unique:categories|min:3'
         ];
@@ -115,8 +126,9 @@ class Categories extends Component
             $category->save();
         }
         //emitimos el evento show-modal
-        //$this->emit('noty','Registro grabado!!!');
-        $this->emit('category-added','Categoria Registrada');
+        $this->emit('noty','Registro grabado!!!',4);
+        //$this->emit('category-added','Categoria Registrada');
+
         $this->resetUI();
 
     }
@@ -200,6 +212,10 @@ class Categories extends Component
         $this->resetUI();
         $this->emit('category-deleted','Categoria Eliminada');
 
+    }
+
+    public function test(){
+        $this->emit('category-deleted','Categoria Eliminada');
     }
 
 }

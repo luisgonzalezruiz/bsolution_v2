@@ -33,8 +33,12 @@
 <script src={{ asset("ubold/assets/libs/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js") }}></script>
 <!-- third party js ends -->
 
-<!-- Datatables init -->
-{{-- <script src={{ asset("ubold/assets/js/pages/customers.init.js") }}></script> --}}
+
+<!-- Sweet Alerts js -->
+<script src={{ asset("ubold/assets/libs/sweetalert2/sweetalert2.all.min.js") }}></script>
+
+<!-- Tost-->
+<script src={{ asset("ubold/assets/libs/jquery-toast-plugin/jquery.toast.min.js") }}></script>
 
 
 
@@ -70,13 +74,10 @@
 window.onload = function() {
 
     //App.init();
-
     ////initNiceScroll();
     //initFlatpickr();
-
     //initPosKeypress();
     //initOnScan();
-
 
 };
 </script>
@@ -150,36 +151,44 @@ window.onload = function() {
 
     // este funcion lo usaremos globalmente para mostrar los mensajes
     // es una libreria javascrips que definimos mas arriba
-    function noty(msg, option = 1) {
-        Snackbar.show({
-            text: msg.toUpperCase(),
-            actionText: 'Cerrar',
-            actionTextColor: '#fff',
-            backgroundColor: option == 1 ? '#3b3f5c' : '#e7515a',
-            pos: 'top-right'
-        });
-    }
+    function noty(msg, option=1) {
 
-    // este metodo es llamado desde los formulario, normalmente para eliminar un registro
-    function Confirm(event, id, text = '¿CONFIRMAS ELIMINAR EL REGISTRO?') {
-        swal({
-            title: 'CONFIRMAR',
-            text: text,
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar',
-            cancelButtonColor: '#fff',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#3b3f5c'
-        }).then(
-            function (result) {
-                if (result.value) {
-                    //console.log('elimine');
-                    window.livewire.emit(event, id);
-                    swal.close();
-                }
-            }
-        );
+        // aqui podemos enviar un parametro opcion
+        // opcion: 1=>Info, 2=>Warning, 3=>error, 4=>Success
+/*         var icono;
+        var heading;
+        switch (option) {
+            case 1:
+                icono = 'info'
+                heading='Info'
+                break;
+            case 2:
+                icono = 'warning'
+                heading='Warning'
+                break;
+            case 3:
+                icono = 'error'
+                heading='Error'
+                break;
+            case 4:
+                icono = 'success'
+                heading='Success'
+                break;
+            default:
+                break;
+        } */
+
+        // 'top-left', 'bottom-center', 'bottom-right', 'bottom-left'
+        $.toast({
+            heading: 'Información',
+            text: msg,
+            icon: 'info',
+            loader: true,        // Change it to false to disable loader
+            //loaderBg: '#9EC600',  // To change the background
+            showHideTransition: 'slide',
+            position: 'top-right'
+        })
+
     }
 
     document.addEventListener('DOMContentLoaded', function () {

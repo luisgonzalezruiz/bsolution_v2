@@ -12,6 +12,12 @@
 <link href={{ asset("ubold/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css") }}  rel="stylesheet" type="text/css" />
 <!-- third party css end -->
 
+<!-- Sweet Alert-->
+<link href={{ asset("ubold/assets/libs/sweetalert2/sweetalert2.min.css") }}  rel="stylesheet" type="text/css" />
+
+<!-- Jquery Toast css -->
+<link href={{ asset("ubold/assets/libs/jquery-toast-plugin/jquery.toast.min.css") }}  rel="stylesheet" type="text/css" />
+
 <!-- App css -->
 <link href={{ asset("ubold/assets/css/config/material/app.min.css") }} rel="stylesheet" type="text/css" id="app-style"/>
 <!-- icons -->

@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
 
     <!-- start page title -->
@@ -42,10 +43,11 @@
 
                         <div class="col-md-4">
                             <div class="text-lg-end">
-                                <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"
-                                    data-bs-toggle="modal" data-bs-target="#custom-modal">
-                                    <i class="mdi mdi-plus-circle me-1"></i> Add New </button>
-                                <button wire.click.prevent="test()" type="button" class="btn btn-light waves-effect mb-2" >Export</button>
+                                <button class="btn btn-danger waves-effect waves-light mb-2 me-2"
+                                    data-bs-toggle="modal" data-bs-target="#theModal">
+                                    <i class="mdi mdi-plus-circle me-1"></i> Add New
+                                </button>
+                                <button wire:click.prevent="new()" class="btn btn-light waves-effect mb-2" >Export</button>
                             </div>
                         </div>
                     </div>
@@ -113,9 +115,10 @@
     </div>
     <!-- end row -->
 
-</div>
+    <!-- Muy importante que este dentro de este div por que sino no funciona -->
+    @include('livewire.category.form')
 
- @include('livewire.category.form')
+</div>
 
 
 
@@ -125,14 +128,24 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // escuchamos el evento que viene del backend
     window.livewire.on('show-modal',msg =>{
-        //console.log(msg)
+        console.log(msg)
         // de esta forma llamamos a la funcion que esta por afuera
-        //test()
+        test()
         $('#theModal').modal('show')
     });
 
     window.livewire.on('category-added',msg =>{
-        $('#theModal').modal('hide')
+        console.log(msg);
+
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        //$('#theModal').modal('hide')
     });
 
     window.livewire.on('category-updated',msg =>{
@@ -151,24 +164,32 @@ function test(){
 function confirm(id, products){
 
     if(products > 0){
-        swal('No se puede eliminar la categoria por que tiene producto relacionado')
+        Swal.fire('No se puede eliminar la categoria por que tiene producto relacionado')
         return;
     }
 
     swal({
-        title: 'CONFIRMAR',
+        title: 'Está seguro?',
         text: 'Confirmas eliminar el registro',
         type: 'warning',
-        showCancelButton: 'Cerrar',
-        cancelButtonColor:'#fff',
-        confirmButtonColor:'#3b3f5c',
+        showCancelButton: true,
+        cancelButtonColor:'#d33',
+        confirmButtonColor:'#3085d6',
         confirmButtonText:'Aceptar'
     }).then(function(result){
-        if(result.value){
-            // este delete row lo definimos en el componente en un listener
+        if (result.isConfirmed) {
             window.livewire.emit('deleteRow',id)
-            swal.close()
+
+            //aqui en lugar del sweet alert podemos usar el toast
+
+            Swal.fire(
+                'Eliminado!',
+                'El registro ha sido eliminado.',
+                'success'
+            )
+
         }
+
     })
 
 }
