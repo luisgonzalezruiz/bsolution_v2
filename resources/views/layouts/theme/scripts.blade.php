@@ -58,6 +58,16 @@
 <script src={{ asset("ubold/assets/js/pages/add-product.init.js")}}></script>
 
 
+{{-- <!-- Bootstrap Tables js -->
+<script src={{ asset("ubold/assets/libs/bootstrap-table/bootstrap-table.min.js")}}></script>
+
+<!-- Init js -->
+<script src={{ asset("ubold/assets/js/pages/bootstrap-tables.init.js")}}></script> --}}
+
+
+
+
+
  {{-- este es del mixin --}}
  <script src="{{ asset('js/app.js') }}"></script>
 

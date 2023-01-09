@@ -91,7 +91,8 @@
 
                     {{ $categories->links() }}
 
-{{--                     <ul class="pagination pagination-rounded justify-content-end my-2">
+                    {{--
+                    <ul class="pagination pagination-rounded justify-content-end my-2">
                         <li class="page-item">
                             <a class="page-link" href="javascript: void(0);" aria-label="Previous">
                                 <span aria-hidden="true">«</span>
@@ -109,7 +110,8 @@
                                 <span class="visually-hidden">Next</span>
                             </a>
                         </li>
-                    </ul> --}}
+                    </ul>
+                    --}}
 
                 </div> <!-- end card-body-->
             </div> <!-- end card-->

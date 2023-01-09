@@ -18,6 +18,9 @@
 <!-- Jquery Toast css -->
 <link href={{ asset("ubold/assets/libs/jquery-toast-plugin/jquery.toast.min.css") }}  rel="stylesheet" type="text/css" />
 
+
+{{-- <link href={{ asset("ubold/assets/libs/bootstrap-table/bootstrap-table.min.css") }} rel="stylesheet" type="text/css" /> --}}
+
 <!-- App css -->
 <link href={{ asset("ubold/assets/css/config/material/app.min.css") }} rel="stylesheet" type="text/css" id="app-style"/>
 <!-- icons -->
