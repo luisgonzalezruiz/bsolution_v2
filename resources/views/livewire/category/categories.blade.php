@@ -13,6 +13,15 @@
                     </ol>
                 </div>
                 <h4 class="page-title">Categorías</h4>
+
+
+                @foreach($items as $item)
+                    <input wire:model="items.{{$loop->index}}.nombre" type="text"/>
+                    <label >{{$item['apellido']}}</label>
+                    <label >{{$item['edad']}}</label>
+                @endforeach
+
+
             </div>
         </div>
     </div>
@@ -47,7 +56,9 @@
                                     data-bs-toggle="modal" data-bs-target="#theModal">
                                     <i class="mdi mdi-plus-circle me-1"></i> Add New
                                 </button>
-                                <button wire:click.prevent="new()" class="btn btn-light waves-effect mb-2" >Export</button>
+                                <button wire:click.prevent="export()" class="btn btn-light waves-effect mb-2" >to Excel</button>
+                                <button wire:click.prevent="exportPDF()" class="btn btn-light waves-effect mb-2" >to PDF</button>
+                                <a href="{{ route('test') }}" target="_blank" class="btn btn-light waves-effect mb-2" >Categorias</a>
                             </div>
                         </div>
                     </div>
@@ -91,28 +102,6 @@
 
                     {{ $categories->links() }}
 
-                    {{--
-                    <ul class="pagination pagination-rounded justify-content-end my-2">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                <span aria-hidden="true">«</span>
-                                <span class="visually-hidden">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                <span aria-hidden="true">»</span>
-                                <span class="visually-hidden">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                    --}}
-
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -125,9 +114,10 @@
 </div>
 
 
-
+@push('scripts')
 
 <script>
+
 document.addEventListener('DOMContentLoaded', function(){
 
     // escuchamos el evento que viene del backend
@@ -197,6 +187,6 @@ function confirm(id, products){
     })
 
 }
-
-
 </script>
+
+@endpush

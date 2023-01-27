@@ -12,6 +12,14 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
+use Illuminate\Support\Arr;
+use LengthException;
+
 class Categories extends Component
 {
     use WithFileUploads;
@@ -27,6 +35,8 @@ class Categories extends Component
     public $pageTitle;
     public $componentName;
 
+    public $items=[];
+
     //escuchamos eventos emitidos desde la vista
     protected $listeners = [
         'deleteRow' => 'destroy'
@@ -39,6 +49,18 @@ class Categories extends Component
         $this->pagination    = 5;
         $this->search        = '';
        // $this->object        = null;
+
+        if (session()->has("items")) {
+            $this->items = session("items");
+        } else {
+         /*
+            $this->items =[
+                    'nombre' => '',
+                    'apellido'=> '',
+                    'edad'=>0
+             ]; */
+        }
+
     }
 
     // limpiamos el buscador
@@ -55,17 +77,38 @@ class Categories extends Component
 
     public function render()
     {
+        // antes de renderizar, recuperamos el contenido de la session
+        //$this->items = session("items");
+
         if (strlen($this->search)) {
             $categories = Category::where('name', 'like', '%'.$this->search.'%')
                 ->orderBy('id', 'desc')->paginate($this->pagination);
         } else {
             $categories = Category::orderBy('id', 'desc')->paginate($this->pagination);
         }
+
         // lo que decimos aqui es: va a renderizar en la seccion content que esta en la plantilla
         // loyouts/theme y el archico app.blade.php
         return view('livewire.category.categories', compact('categories'))
                 ->extends('layouts.theme.app')
                 ->section('content');
+    }
+
+    public function addItem()
+    {
+        // aqui agregamos el item
+        array_push($this->items,
+                [
+                    'nombre' => $this->name,
+                    'apellido'=> $this->name . ' prueba final',
+                    'edad'=>10
+                ]);
+
+
+        session()->put("items", $this->items);
+        session()->save();
+
+
     }
 
     public function new()
@@ -129,7 +172,12 @@ class Categories extends Component
         $this->emit('noty','Registro grabado!!!',4);
         //$this->emit('category-added','Categoria Registrada');
 
+
+        $this->addItem();
+
         $this->resetUI();
+
+
 
     }
 
@@ -217,5 +265,26 @@ class Categories extends Component
     public function test(){
         $this->emit('category-deleted','Categoria Eliminada');
     }
+
+    public function export()
+    {
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
+    }
+
+    public function exportPDF()
+    {
+        //Recuperar todos los productos de la db
+        $categories = Category::all();
+        //dd($categories);
+        //view()->share('categorias', $categorias);
+        $pdf = pdf::loadView('pdf.reporte', compact('categories'));
+        return $pdf->stream('salesReport.pdf');
+        //return $pdf->download('archivo-pdf.pdf');
+
+
+    }
+
+
+
 
 }

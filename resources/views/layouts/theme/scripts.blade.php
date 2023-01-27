@@ -64,13 +64,12 @@
 <!-- Init js -->
 <script src={{ asset("ubold/assets/js/pages/bootstrap-tables.init.js")}}></script> --}}
 
-
-
+{{-- aqui se incrustaran los scripts especificos de cada componente --}}
+@stack('scripts')
 
 
  {{-- este es del mixin --}}
  <script src="{{ asset('js/app.js') }}"></script>
-
 
 <!-- App js -->
  <script src={{ asset("ubold/assets/js/app.min.js") }}></script>
@@ -79,8 +78,8 @@
 
 
 
-
 <script>
+
 window.onload = function() {
 
     //App.init();
@@ -90,6 +89,7 @@ window.onload = function() {
     //initOnScan();
 
 };
+
 </script>
 
 <script>
