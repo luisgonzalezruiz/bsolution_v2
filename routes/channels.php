@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+Broadcast::channel('category', function () {
+    return true;
+});
+
+
+//esto debe coincidir con el channel creado en el evento NewTicket
+//el id(corresponde al usuario a quien se le asigno el ticket)
+//el $user(es el usuario actualmente autenticado) y debe coindicidir con el usuario asignado para que
+//pueda escuchar el evento
+/* Broadcast::channel('ticket.{id}', function ($user, $id) {
+    // este user es el logueado, el $id seria el user_id que asignamos en el ticket
+    return $user->id === (int) $id;
+});
+ */

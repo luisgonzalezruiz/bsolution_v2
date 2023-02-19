@@ -20,6 +20,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Arr;
 use LengthException;
 
+use App\Events\CategoryCreated;
+
 class Categories extends Component
 {
     use WithFileUploads;
@@ -37,10 +39,25 @@ class Categories extends Component
 
     public $items=[];
 
+    // para manejar notificacion
+    public $showNewCategoryNotification = false;
+    public $count=0;
+
     //escuchamos eventos emitidos desde la vista
+    //'echo:category,CategoryCreated' => 'notifyNewCategory'
     protected $listeners = [
-        'deleteRow' => 'destroy'
+        'deleteRow' => 'destroy',
+        'noty'=>'notifyNewCategory'
     ];
+
+
+/*     public function getListeners(): array
+    {
+        //$authId = auth()->id();
+        return [
+            "echo:category" => 'notifyNewCategory',
+        ];
+    } */
 
     public function mount()
     {
@@ -168,6 +185,13 @@ class Categories extends Component
             $category->image = $url; //$customFileName;
             $category->save();
         }
+
+        //*********************************************************************************
+        // emitimos un evento, y esto sera capturado por un listener del lado del cliente
+        //*********************************************************************************
+        event(new CategoryCreated($category)); // fire the event
+        //*********************************************************************************
+
         //emitimos el evento show-modal
         $this->emit('noty','Registro grabado!!!',4);
         //$this->emit('category-added','Categoria Registrada');
@@ -281,7 +305,13 @@ class Categories extends Component
         return $pdf->stream('salesReport.pdf');
         //return $pdf->download('archivo-pdf.pdf');
 
+    }
 
+    public function notifyNewCategory()
+    {
+        $this->showNewCategoryNotification = true;
+        $this->count = $this->count + 1;
+        //$this->emit('category-deleted','Categoria Eliminada');
     }
 
 

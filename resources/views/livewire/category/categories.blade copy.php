@@ -12,16 +12,7 @@
                         <li class="breadcrumb-item active">Sellers</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Categorías {{ $count }}</h4>
-
-
-{{--                 @foreach($items as $item)
-                    <input wire:model="items.{{$loop->index}}.nombre" type="text"/>
-                    <label >{{$item['apellido']}}</label>
-                    <label >{{$item['edad']}}</label>
-                @endforeach --}}
-
-
+                <h4 class="page-title">Categorías</h4>
             </div>
         </div>
     </div>
@@ -56,9 +47,7 @@
                                     data-bs-toggle="modal" data-bs-target="#theModal">
                                     <i class="mdi mdi-plus-circle me-1"></i> Add New
                                 </button>
-                                <button wire:click.prevent="export()" class="btn btn-light waves-effect mb-2" >to Excel</button>
-                                <button wire:click.prevent="exportPDF()" class="btn btn-light waves-effect mb-2" >to PDF</button>
-                                <a href="{{ route('test') }}" target="_blank" class="btn btn-light waves-effect mb-2" >Categorias</a>
+                                <button wire:click.prevent="new()" class="btn btn-light waves-effect mb-2" >Export</button>
                             </div>
                         </div>
                     </div>
@@ -99,8 +88,9 @@
                             </tbody>
                         </table>
                     </div>
-
+                    {{-- agregamos nuestro paginado  --}}
                     {{ $categories->links() }}
+
 
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
@@ -113,33 +103,11 @@
 
 </div>
 
-@push('scripts')
+
+
 
 <script>
-
-
-
-
 document.addEventListener('DOMContentLoaded', function(){
-
-    //************************************************************
-    // de esta manera emitimos un evento mediante pusher
-   Pusher.logToConsole = true;
-    var pusher = new Pusher('2e7c67c07475dd8c71f0', {
-        cluster: 'us2'
-    });
-
-    var channel = pusher.subscribe('category');
-    channel.bind('CategoryCreated', function(data) {
-        //app.messages.push(JSON.stringify(data));
-        console.log(data);
-        //invocamos a un listener que esta en el componente con nombre noty y esta llama a un metodo
-        //que aumenta la cantidad
-        window.livewire.emit('noty')
-    });
-    //************************************************************
-
-
 
     // escuchamos el evento que viene del backend
     window.livewire.on('show-modal',msg =>{
@@ -208,6 +176,8 @@ function confirm(id, products){
     })
 
 }
-</script>
 
-@endpush
+//Zona DataTable
+
+
+</script>

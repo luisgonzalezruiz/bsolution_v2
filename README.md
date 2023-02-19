@@ -1,3 +1,6 @@
+asi creamos un evento
+php artisan make:event PodcastProcessed
+
 Esto es una prueba
 Siguiente prueba
 

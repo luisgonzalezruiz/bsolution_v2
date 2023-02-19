@@ -22,6 +22,7 @@
 
 
 
+
 <!-- Vendor js -->
 <script src={{ asset("ubold/assets/js/vendor.min.js") }}></script>
 
@@ -64,31 +65,40 @@
 <!-- Init js -->
 <script src={{ asset("ubold/assets/js/pages/bootstrap-tables.init.js")}}></script> --}}
 
+
+
+<!-- App js -->
+<script src={{ asset("ubold/assets/js/app.min.js") }}></script>
+
+
+{{-- este es del mixin --}}
+<script src="{{ mix('js/app.js') }}"></script>
+{{-- <script src="{{ asset('/js/app.js') }}"></script> --}}
+
+
+{{-- <script src="https://js.pusher.com/6.0/pusher.min.js"></script> --}}
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
+
 {{-- aqui se incrustaran los scripts especificos de cada componente --}}
 @stack('scripts')
 
 
- {{-- este es del mixin --}}
- <script src="{{ asset('js/app.js') }}"></script>
-
-<!-- App js -->
- <script src={{ asset("ubold/assets/js/app.min.js") }}></script>
-
-
-
-
 
 <script>
+/*
+    Pusher.logToConsole = true;
 
-window.onload = function() {
+    var pusher = new Pusher('2e7c67c07475dd8c71f0', {
+      cluster: 'us2'
+    });
 
-    //App.init();
-    ////initNiceScroll();
-    //initFlatpickr();
-    //initPosKeypress();
-    //initOnScan();
-
-};
+    var channel = pusher.subscribe('category');
+    channel.bind('CategoryCreated', function(data) {
+        //app.messages.push(JSON.stringify(data));
+        console.log(data);
+    });
+*/
 
 </script>
 
@@ -221,6 +231,11 @@ window.onload = function() {
         window.livewire.on('print-ticket', saleId => {
             window.open('print://' + saleId, '_blank');
         });
+
+        console.log('llegue')
+
+
+
     })
 
 </script>
