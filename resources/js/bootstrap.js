@@ -46,8 +46,8 @@ if (token) {
 //pusher
 //********************************************************** */
 
-/*
 
+/*
 import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');
 
@@ -58,8 +58,9 @@ window.Echo = new Echo({
     cluster: "us2",
     forceTLS: true
 });
-
 */
+
+
 
 
 

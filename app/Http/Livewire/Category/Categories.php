@@ -45,9 +45,11 @@ class Categories extends Component
 
     //escuchamos eventos emitidos desde la vista
     //'echo:category,CategoryCreated' => 'notifyNewCategory'
+    //'noty'=>'notifyNewCategory1',
+
     protected $listeners = [
         'deleteRow' => 'destroy',
-        'noty'=>'notifyNewCategory'
+        'test'=>'notifyNewCategory'
     ];
 
 
@@ -191,6 +193,10 @@ class Categories extends Component
         //*********************************************************************************
         event(new CategoryCreated($category)); // fire the event
         //*********************************************************************************
+        // este esta en el listener al inicio de este componente
+        //$this->emit('infoGlobal');   // este ejecuta un metodo para la notificacion
+
+
 
         //emitimos el evento show-modal
         $this->emit('noty','Registro grabado!!!',4);
@@ -302,17 +308,18 @@ class Categories extends Component
         //dd($categories);
         //view()->share('categorias', $categorias);
         $pdf = pdf::loadView('pdf.reporte', compact('categories'));
-        return $pdf->stream('salesReport.pdf');
-        //return $pdf->download('archivo-pdf.pdf');
+        //return $pdf->stream('salesReport.pdf');
+        return $pdf->download('archivo-pdf.pdf');
 
     }
 
+    /*
     public function notifyNewCategory()
     {
         $this->showNewCategoryNotification = true;
         $this->count = $this->count + 1;
-        //$this->emit('category-deleted','Categoria Eliminada');
     }
+    */
 
 
 

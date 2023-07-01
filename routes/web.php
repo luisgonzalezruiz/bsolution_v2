@@ -18,6 +18,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/categories', Categories::class)->name('categories');
+
     Route::get('/categories/export', [Categories::class,'exportPDF'])->name('test');
 
     Route::get('/products', Products::class)->name('products');

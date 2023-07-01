@@ -57,7 +57,6 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-
     <!-- Scripts -->
     @include('layouts.theme.scripts')
 
@@ -66,6 +65,30 @@
 
     {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 
+
+    <script>
+
+/*
+
+        //************************************************************
+        // de esta manera emitimos un evento mediante pusher
+        //************************************************************
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('2e7c67c07475dd8c71f0', {
+            cluster: 'us2'
+        });
+
+        var channel = pusher.subscribe('category-channel');
+        channel.bind('category-event', function(data) {
+            //infoGlobal es un listener que esta en el componente Notificaciones
+            window.livewire.emit('infoGlobal',JSON.stringify(data))
+            //alert(JSON.stringify(data));
+        });
+        //************************************************************
+
+*/
+
+    </script>
 
 
 </body>

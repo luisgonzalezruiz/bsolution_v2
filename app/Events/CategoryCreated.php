@@ -44,6 +44,19 @@ class CategoryCreated implements ShouldBroadcastNow  //ShouldBroadcastNow
     public function broadcastOn()
     {
        // return new Channel('product.' . $this->data['product']->id);
-        return new Channel('category');
+       //return new Channel('category');
+       //return  'category-channel';
+
+        return new Channel('category-channel');
+        //return new PrivateChannel('ticket.' . $this->ticket->user_id);
+
     }
+
+
+    public function broadcastAs()
+    {
+        return 'category-event';
+    }
+
+
 }

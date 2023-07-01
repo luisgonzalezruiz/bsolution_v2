@@ -121,22 +121,29 @@
 
 
 document.addEventListener('DOMContentLoaded', function(){
-
+/*
     //************************************************************
     // de esta manera emitimos un evento mediante pusher
-   Pusher.logToConsole = true;
+    //************************************************************
+
+    Pusher.logToConsole = true;
     var pusher = new Pusher('2e7c67c07475dd8c71f0', {
-        cluster: 'us2'
+        cluster: 'us2',
+        forceTLS:true
     });
 
-    var channel = pusher.subscribe('category');
-    channel.bind('CategoryCreated', function(data) {
+    var channel = pusher.subscribe('category-channel');
+    channel.bind('category-event', function(data) {
         //app.messages.push(JSON.stringify(data));
-        console.log(data);
+        alert(JSON.stringify(data));
         //invocamos a un listener que esta en el componente con nombre noty y esta llama a un metodo
         //que aumenta la cantidad
-        window.livewire.emit('noty')
+        //var x=document.getElementById("info").innerHTML;
+        //document.getElementById("info").innerHTML = 15;
+        //window.livewire.emit('info')
     });
+*/
+
     //************************************************************
 
 

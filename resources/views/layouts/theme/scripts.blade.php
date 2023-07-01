@@ -84,24 +84,6 @@
 @stack('scripts')
 
 
-
-<script>
-/*
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('2e7c67c07475dd8c71f0', {
-      cluster: 'us2'
-    });
-
-    var channel = pusher.subscribe('category');
-    channel.bind('CategoryCreated', function(data) {
-        //app.messages.push(JSON.stringify(data));
-        console.log(data);
-    });
-*/
-
-</script>
-
 <script>
 
 /*
